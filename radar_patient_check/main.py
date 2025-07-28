@@ -120,7 +120,7 @@ async def radar_check(
             response.nhs_number = True
 
             recorded_dobs_query = (
-                session.query(Patient.birth_time).filter(Patient.pid.in_(pids)).all()
+                session.query(Patient).filter(Patient.pid.in_(pids)).all()
             )
 
             recorded_dobs = [
@@ -159,7 +159,7 @@ async def ukrdc_check(
         response.nhs_number = True
 
         recorded_dobs_query = (
-            session.query(Patient.birth_time).filter(Patient.pid.in_(pids)).all()
+            session.query(Patient).filter(Patient.pid.in_(pids)).all()
         )
 
         recorded_dobs = [

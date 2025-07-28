@@ -1,12 +1,24 @@
-from sqlmodel import Session, create_engine
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from .config import settings
 
+_engine = None
 
 def get_session():
-    db_url = settings.sqlalchemy_database_url
-    if not db_url:
+    global _engine
+
+    if not settings.sqlalchemy_database_url:
         raise ValueError("SQLALCHEMY_DATABASE_URL not set")
 
-    with Session(create_engine(db_url)) as session:
-        yield session
+    if _engine is None:
+        _engine = create_engine(settings.sqlalchemy_database_url)
+
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
+
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
