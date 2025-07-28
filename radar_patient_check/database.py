@@ -1,12 +1,21 @@
-from sqlmodel import Session, create_engine
+from rr_connection_manager import PostgresConnection
 
 from .config import settings
 
 
 def get_session():
-    db_url = settings.sqlalchemy_database_url
-    if not db_url:
-        raise ValueError("SQLALCHEMY_DATABASE_URL not set")
+    if not settings.server:
+        raise ValueError("server is not set")
 
-    with Session(create_engine(db_url)) as session:
-        yield session
+    conn = PostgresConnection(
+        app=settings.server,
+        tunnel=settings.with_tunnel,
+        via_app=settings.via_app,
+    )
+    ukrdc_sessionmaker = conn.session_maker(autocommit=False, autoflush=False)
+
+    db = ukrdc_sessionmaker()
+    try:
+        yield db
+    finally:
+        db.close()

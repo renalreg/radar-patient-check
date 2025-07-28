@@ -1,0 +1,35 @@
+[project]
+name = "radar_patient_check"
+version = "0.0.1"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.116.1",
+    "uvicorn==0.35.0",
+    "ukrdc-sqla==2.6.5",
+    "psycopg2-binary==2.9.10",
+    "pydantic[dotenv]==1.10.2",
+    "rr-connection-manager~=0.4.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "pylint",
+    "requests",
+    "httpx",
+    "pytest==8.4.1",
+    "tox-uv>=1.26.2",
+    "mypy>=1.17.0",
+    "ursus @ git+ssh://git@github.com/renalreg/Ursus.git",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.uv]
+package = false
+
+[tool.hatch.metadata]
+allow-direct-references = true

@@ -4,7 +4,9 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    sqlalchemy_database_url: Optional[str] = None
+    server: Optional[str] = None
+    with_tunnel: bool = False
+    via_app: bool = False
 
     radar_apikeys: List[str] = []
     ukrdc_apikeys: List[str] = []

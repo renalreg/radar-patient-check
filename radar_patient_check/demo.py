@@ -7,7 +7,9 @@ class DemoPatientDetails:
     date_of_birth: datetime.date
     is_radar_member: bool
 
+
 check_digit_weights = {0: 10, 1: 9, 2: 8, 3: 7, 4: 6, 5: 5, 6: 4, 7: 3, 8: 2}
+
 
 def calculate_check_digit(nhs_number: str) -> int:
     """Given the first 9 or 10 digits of a 10-digit NHS number, calculate the check digit.
@@ -27,6 +29,7 @@ def calculate_check_digit(nhs_number: str) -> int:
         return 0
 
     return eleven_minus_remainder
+
 
 DEMO_PATIENTS_MAP = {
     "9686368973": DemoPatientDetails(
@@ -101,9 +104,8 @@ for i in range(999000001, 999000011):
     """
     nhs_number_pre = "{:09d}".format(i)
     nhs_number = nhs_number_pre + str(calculate_check_digit(nhs_number_pre))
-    date_of_birth = datetime.date(1972, 1, i%31)
+    date_of_birth = datetime.date(1972, 1, i % 31)
 
     DEMO_PATIENTS_MAP[nhs_number] = DemoPatientDetails(
-        date_of_birth=date_of_birth,
-        is_radar_member=True
+        date_of_birth=date_of_birth, is_radar_member=True
     )

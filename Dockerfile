@@ -1,10 +1,9 @@
-FROM python:3.10
+FROM python:3.11
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
+COPY pyproject.toml ./
 COPY . .
-
-CMD [ "uvicorn", "radar_patient_check.main:app", "--host", "0.0.0.0" ] 
+RUN uv sync --no-dev
+CMD [ "uv", "run","--no-dev", "uvicorn", "radar_patient_check.main:app", "--host", "0.0.0.0" ]

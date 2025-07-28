@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+
 def test_main_radar_check(client: TestClient):
     response = client.post(
         "/radar_check/",
