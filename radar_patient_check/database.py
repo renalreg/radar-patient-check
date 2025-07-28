@@ -5,6 +5,7 @@ from .config import settings
 
 _engine = None
 
+
 def get_session():
     global _engine
 
@@ -21,4 +22,3 @@ def get_session():
         yield db
     finally:
         db.close()
-

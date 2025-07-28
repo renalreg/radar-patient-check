@@ -13,7 +13,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "black",
+    "ruff",
     "pylint",
     "requests",
     "httpx",

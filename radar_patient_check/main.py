@@ -57,6 +57,7 @@ def base_api_key_auth(
     if request_key not in key_list:
         raise HTTPException(status_code=401, detail="Forbidden")
 
+
 def radar_api_key_auth(
     token: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer()),
 ):
@@ -65,6 +66,7 @@ def radar_api_key_auth(
     """
     base_api_key_auth(settings.radar_apikeys, token)
 
+
 def ukrdc_api_key_auth(
     token: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer()),
 ):
@@ -72,7 +74,7 @@ def ukrdc_api_key_auth(
     FastAPI dependency for UKRDC API key authentication
     """
     base_api_key_auth(settings.ukrdc_apikeys, token)
-    
+
 
 @app.post(
     "/radar_check/",
@@ -158,9 +160,7 @@ async def ukrdc_check(
 
         response.nhs_number = True
 
-        recorded_dobs_query = (
-            session.query(Patient).filter(Patient.pid.in_(pids)).all()
-        )
+        recorded_dobs_query = session.query(Patient).filter(Patient.pid.in_(pids)).all()
 
         recorded_dobs = [
             recorded_dob.birth_time.date() for recorded_dob in recorded_dobs_query
