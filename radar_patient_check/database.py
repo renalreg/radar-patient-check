@@ -1,23 +1,20 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from rr_connection_manager import PostgresConnection
 
 from .config import settings
 
-_engine = None
-
 
 def get_session():
-    global _engine
+    if not settings.server:
+        raise ValueError("server is not set")
 
-    if not settings.sqlalchemy_database_url:
-        raise ValueError("SQLALCHEMY_DATABASE_URL not set")
+    conn = PostgresConnection(
+        app=settings.server,
+        tunnel=settings.with_tunnel,
+        via_app=settings.via_app,
+    )
+    ukrdc_sessionmaker = conn.session_maker(autocommit=False, autoflush=False)
 
-    if _engine is None:
-        _engine = create_engine(settings.sqlalchemy_database_url)
-
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
-
-    db = SessionLocal()
+    db = ukrdc_sessionmaker()
     try:
         yield db
     finally:

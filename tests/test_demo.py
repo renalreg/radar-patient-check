@@ -1,5 +1,11 @@
 from fastapi.testclient import TestClient
 
+from radar_patient_check.database import get_session
+
+
+def test_temp():
+    get_session()
+
 def test_main_radar_check(client: TestClient):
     response = client.post(
         "/radar_check/",
