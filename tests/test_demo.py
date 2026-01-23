@@ -25,3 +25,14 @@ def test_main_radar_check_nhs_correct_dob_not(client: TestClient):
     )
     assert response.status_code == 200
     assert response.json() == {"nhsNumber": True, "dateOfBirth": False}
+
+def test_invalid_key(client: TestClient):
+    response = client.post(
+        "/radar_check/",
+        headers={"Authorization": "Bearer PYTESTKEYinvalid"},
+        json={
+            "nhsNumber": "9658218881",
+            "dateOfBirth": "1921-08-08",
+        },
+    )
+    assert response.status_code == 401

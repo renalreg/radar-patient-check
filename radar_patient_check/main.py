@@ -3,7 +3,7 @@ from typing import Optional, List
 
 from fastapi import Depends, FastAPI, HTTPException, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from ukrdc_sqla.ukrdc import Patient, PatientNumber, ProgramMembership
 
 from .config import settings
@@ -34,8 +34,7 @@ class RecordCheckResponse(BaseModel):
         alias="dateOfBirth",
     )
 
-    class Config:
-        allow_population_by_field_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 def base_api_key_auth(
@@ -64,7 +63,7 @@ def radar_api_key_auth(
     """
     FastAPI dependency for RADAR API key authentication
     """
-    base_api_key_auth(settings.radar_apikeys, token)
+    base_api_key_auth(settings.RADAR_APIKEYS, token)
 
 
 def ukrdc_api_key_auth(
@@ -73,7 +72,7 @@ def ukrdc_api_key_auth(
     """
     FastAPI dependency for UKRDC API key authentication
     """
-    base_api_key_auth(settings.ukrdc_apikeys, token)
+    base_api_key_auth(settings.UKRDC_APIKEYS, token)
 
 
 @app.post(
@@ -91,7 +90,7 @@ async def radar_check(
     Can return true for the NHS number and false for the DoB if the membership exists but DoB does not match.
     """
 
-    # NOTE: Pylance (VS Code language server) struggles with this line as Pydantic aliases confuse it.
+    # NOTE: Pylance (VS Code language SERVER) struggles with this line as Pydantic aliases confuse it.
     #       It's fine to ignore the error.
     response = RecordCheckResponse(nhs_number=False, date_of_birth=False)  # type: ignore
 

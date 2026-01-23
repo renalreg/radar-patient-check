@@ -65,8 +65,8 @@ def client_fixture():
     Create a test client and override the FastAPI dependency.
     Depends on the session fixture.
     """
-    settings.radar_apikeys = ["PYTESTKEY0000000000"]
-    settings.ukrdc_apikeys = ["PYTESTKEY0000000001"]
+    settings.RADAR_APIKEYS = ["PYTESTKEY0000000000"]
+    settings.UKRDC_APIKEYS = ["PYTESTKEY0000000001"]
 
     def get_session_override():
         new_session = PolarsSession()
