@@ -20,7 +20,7 @@ dev = [
     "httpx",
     "pytest==8.4.1",
     "tox-uv>=1.26.2",
-    "mypy>=1.17.0",
+    "ty",
     "ursus @ git+ssh://git@github.com/renalreg/Ursus.git",
 ]
 
