@@ -108,7 +108,11 @@ To deploy for production follow the following steps.
 2. Create a .env file with the following variables and populate
 
    ```python
-   SQLALCHEMY_DATABASE_URL = ""
+   DB_USER=""
+   DB_HOST=""
+   DATABASE=""
+   DB_PASSWORD=""
+   DB_PORT=""
    RADAR_APIKEYS = ["", ""]
    UKRDC_APIKEYS = ["", ""]
    ```
