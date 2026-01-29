@@ -6,8 +6,8 @@ from .config import settings
 
 
 def get_session():
-    if settings.database_url:
-        engine = create_engine(url=settings.database_url)
+    if settings.SQLALCHEMY_DATABASE_URL:
+        engine = create_engine(url=settings.SQLALCHEMY_DATABASE_URL)
         ukrdc_sessionmaker = sessionmaker(
             bind=engine, autoflush=False, autocommit=False
         )
