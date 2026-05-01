@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     RADAR_APIKEYS: List[str] = []
     UKRDC_APIKEYS: List[str] = []
 
-    SQLALCHEMY_DATABASE_URL: str = None
+    SQLALCHEMY_DATABASE_URL: Optional[str] = None
 
     model_config = SettingsConfigDict(
         env_file_encoding="utf-8",
