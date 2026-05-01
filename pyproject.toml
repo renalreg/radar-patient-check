@@ -21,7 +21,7 @@ dev = [
     "pytest==8.4.1",
     "tox-uv>=1.26.2",
     "ty",
-    "ursus @ git+ssh://git@github.com/renalreg/Ursus.git",
+    "ursus @ git+https://github.com/renalreg/Ursus.git",
 ]
 
 [build-system]

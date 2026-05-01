@@ -975,7 +975,7 @@ dev = [
     { name = "ruff" },
     { name = "tox-uv", specifier = ">=1.26.2" },
     { name = "ty" },
-    { name = "ursus", git = "ssh://git@github.com/renalreg/Ursus.git" },
+    { name = "ursus", git = "https://github.com/renalreg/Ursus.git" },
 ]
 
 [[package]]
@@ -1217,8 +1217,8 @@ wheels = [
 
 [[package]]
 name = "ursus"
-version = "0.1.0"
-source = { git = "ssh://git@github.com/renalreg/Ursus.git#faca887ab86bb74b813d6096fe4ca4cc322f000b" }
+version = "0.2.1"
+source = { git = "https://github.com/renalreg/Ursus.git#29ef87c38636058d3bafa7b60b1bc50cdc459dd2" }
 dependencies = [
     { name = "polars" },
     { name = "psycopg2-binary" },
