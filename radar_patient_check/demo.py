@@ -86,6 +86,10 @@ DEMO_PATIENTS_MAP = {
     "9434899656": DemoPatientDetails(
         date_of_birth=datetime.date(2011, 6, 30), is_radar_member=True
     ),
+    # Pentest account
+    "9711799464": DemoPatientDetails(
+        date_of_birth=datetime.date(1990, 1, 1), is_radar_member=True
+    ),
 }
 
 for i in range(999000001, 999000011):
