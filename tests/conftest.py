@@ -14,7 +14,7 @@ from radar_patient_check.main import app
 
 
 def _create_test_data(session: Session):
-    # Test patient with RADAR membership
+    # Test patient with RADAR memberships
     session.add(
         Patient(
             pid="1",
